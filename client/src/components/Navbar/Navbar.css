@@ -1,0 +1,45 @@
+/* Palette colors */
+/* #ffc107;  #1F271B; #D4E97B; #B4E8C3; #7F7B7B*/
+
+.nav-container{
+    /* background: #1F271B; */
+    border-bottom: 1px solid #ffc107;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+    padding: 0 60px;
+    max-width: 1300px;
+}
+
+.logo-nav{
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #ffc107;
+}
+
+.span{
+    background: #B4E8C3;
+    background: linear-gradient(to right, #ffc107 0%, #D4E97B 25%, #B4E8C3 50%, #7F7B7B 75%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.btn{
+    color: #ffc107;
+    border: 1px solid #ffc107;
+}

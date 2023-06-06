@@ -1,10 +1,15 @@
 const { Country } = require("../db");
+const { Op } = require('sequelize')
 
 const getCountryById = async (id) => {
-  console.log(id);
   try {
-    const country = await Country.findOne({ where: { id } });
-
+    const country = await Country.findOne({
+      where: {
+        id: {
+          [Op.iLike]: `%${id}%`,
+        },
+      },
+    });
     return country;
   } catch (error) {
     throw error;
