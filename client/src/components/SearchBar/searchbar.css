@@ -1,0 +1,16 @@
+.search-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.search{
+    width: 200px;
+	height: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+}

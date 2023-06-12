@@ -1,49 +1,31 @@
-import { ADD_COUNTRY, 
-    REMOVE_COUNTRY, 
-    // FILTER, ORDER 
-} from "./actions";
+import { GET_ALL_COUNTRY, GET_BY_DETAIL, GET_BY_NAME } from "./actions";
 
-const initialState = {
-  myFavorites: [],
+let initialState = {
   allCountries: [],
+  activity: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_COUNTRY:
+    case GET_ALL_COUNTRY:
       return {
         ...state,
-        myFavorites: action.payload,
         allCountries: action.payload,
       };
 
-    case REMOVE_COUNTRY:
+    case GET_BY_NAME:
       return {
         ...state,
-        myFavorites: action.payload
+        allCountries: action.payload,
       };
-
-    // case FILTER:
-    //   const filterChar = state.allCountries.filter(
-    //     (char) => char.gender === action.payload
-    //   );
-    //   return {
-    //     ...state,
-    //     myFavorites: filterChar,
-    //   };
-
-    // case ORDER:
-    //   const allCharactersCopy = [...state.allCharacters];
-    //   return {
-    //     ...state,
-    //     myFavorites:
-    //       action.payload === "A"
-    //         ? allCharactersCopy.sort((a, b) => a.id - b.id)
-    //         : allCharactersCopy.sort((a, b) => b.id - a.id),
-    //   };
+      case GET_BY_DETAIL: 
+      return {
+        ...state,
+        allCountries: action.payload
+      }
 
     default:
-      return { ...state };
+      return state;
   }
 };
 

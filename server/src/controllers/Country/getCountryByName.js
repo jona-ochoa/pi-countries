@@ -1,8 +1,7 @@
-const { Country } = require("../db");
+const { Country } = require("../../db");
 const { Op } = require("sequelize");
 
 const getCountryByName = async (name) => {
-
   try {
     const filteredCountry = await Country.findAll({
       where: {
@@ -16,7 +15,7 @@ const getCountryByName = async (name) => {
       ? filteredCountry
       : new Error("Country not Found");
   } catch (error) {
-    return { error: `No hay paises con nombre: ${name}` };
+    throw error;
   }
 };
 

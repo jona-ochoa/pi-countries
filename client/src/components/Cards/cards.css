@@ -1,0 +1,8 @@
+.cards-container{
+    display: grid;
+    width: 85vw;
+    margin: 0 auto;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
