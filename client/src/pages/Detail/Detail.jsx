@@ -23,14 +23,15 @@ const Detail = () => {
 
   return (
     <section className="detail-section">
-      <img src={detail?.flags} alt={detail?.name} />
+      <Link to="/home" className="nav-link">Back to Home</Link>
       <h4>Name: {detail?.name}</h4>
+      <img src={detail?.flags} alt={detail?.name} />
+      <p>ID: {detail?.id}</p>
       <p>Capital: {detail?.capital}</p>
       <p>Continents: {detail?.continents}</p>
       <p>Subregion: {detail?.subregion}</p>
       <p>Area: {detail?.area}</p>
       <p>Population: {detail?.population}</p>
-      <Link to="/home">Back to Home</Link>
     </section>
   )
 }

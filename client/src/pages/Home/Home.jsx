@@ -11,6 +11,7 @@ import "./Home.css";
 const Home = () => {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.allCountries);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [search, setSearch] = useState("");
 
@@ -22,6 +23,7 @@ const Home = () => {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(getByName(search));
+    setCurrentPage(1);
   }
 
   useEffect(() => {
@@ -31,7 +33,13 @@ const Home = () => {
   return (
     <div className="home-container">
       <Searchbar handleChange={handleChange} handleSubmit={handleSubmit} />
-     {allCountries && <Cards allCountries={allCountries} />}
+      {allCountries && (
+        <Cards
+          allCountries={allCountries}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </div>
   );
 };

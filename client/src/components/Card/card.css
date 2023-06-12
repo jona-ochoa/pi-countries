@@ -10,8 +10,19 @@
     transform: translateZ(0);
     transition: transform 0.25s ease-out;
     -moz-osx-font-smoothing: grayscale;
+    font-weight: 900;
 }
 .image{
-    width: 300px;
-    height: 200px;
+    width: 200px;
+    height: 100px;
+}
+
+.nav-link{
+    transition: all .3s ease;
+}
+.nav-link:hover{
+    color: white;;
+}
+p{
+    font-weight: 900;
 }

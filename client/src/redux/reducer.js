@@ -2,7 +2,7 @@ import { GET_ALL_COUNTRY, GET_BY_DETAIL, GET_BY_NAME } from "./actions";
 
 let initialState = {
   allCountries: [],
-  activity: [],
+  allContinents: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,7 +22,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allCountries: action.payload
-      }
+      };     
 
     default:
       return state;

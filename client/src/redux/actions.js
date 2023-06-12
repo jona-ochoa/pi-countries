@@ -58,16 +58,16 @@ export function getByDetail(id) {
   };
 }
 
-export const filterCards = (name) => {
-  return {
-    type: FILTER,
-    payload: name,
-  };
-};
-
 export const orderCards = (orden) => {
   return {
     type: ORDER,
     payload: orden,
+  };
+};
+
+export const filterCards = (name) => {
+  return {
+    type: FILTER,
+    payload: name,
   };
 };

@@ -1,10 +1,11 @@
+/* #ffc107;  #1F271B; #D4E97B; #B4E8C3; #7F7B7B*/
 .landing-container {
     /* width: 90%; */
     max-width: 1400px;
     margin: 0;
     height: 100vh;
     padding: 0;
-    background-image: url('../../assets/countries.png');
+    background-image: url('../../assets/world.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -21,7 +22,9 @@
 }
 
 .title {
-    font-size: 35px;
+    font-size: 50px;
+    font-weight: 700;
+    color: #B4E8C3;
     margin: 0;
 }
 
@@ -30,5 +33,5 @@
 }
 
 span{
-    color: #ffc107;
+    color: #D4E97B;
 }
