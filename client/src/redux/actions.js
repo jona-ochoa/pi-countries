@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_ALL_COUNTRY = "GET_ALL_COUNTRY";
 export const GET_BY_NAME = "GET_BY_NAME";
 export const GET_BY_DETAIL = "GET_BY_DETAIL";
+export const GET_ACTIVITY = "GET_ACTIVITY";
 export const FILTER = "FILTER";
 export const ORDER = "ORDER";
 
@@ -58,16 +59,43 @@ export function getByDetail(id) {
   };
 }
 
-export const orderCards = (orden) => {
+export function getActivity() {
+  return async function (dispatch) {
+      try {
+          const res = await axios.get('http://localhost:3001/countries/activity');
+          return dispatch({
+              type: GET_ACTIVITY,
+              payload: res.data
+          })
+      } catch (error) {
+          console.log(error)
+      }
+  }
+}
+
+export function postActivity(payload) {
+    return async function () {
+        try {
+            const res = await axios.post('http://localhost:3001/activity/', payload)
+            return res;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+
+
+export const orderCountries = (payload) => {
   return {
     type: ORDER,
-    payload: orden,
+    payload
   };
 };
 
-export const filterCards = (name) => {
+export const filterCountries = (payload) => {
   return {
     type: FILTER,
-    payload: name,
+    payload
   };
 };

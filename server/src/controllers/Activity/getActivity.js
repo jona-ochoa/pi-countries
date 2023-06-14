@@ -1,19 +1,14 @@
 const { Activity, Country } = require("../../db");
 
 const getActivity = async () => {
-  try {
-    const activities = await Activity.findAll({
-      include: {
-        model: Country,
-        as: "Countries",
-        atributes: ["id", "name"],
-        through: { atributes: [] },
-      },
-    });
-    return activities;
-  } catch (error) {
-    throw Error;
-  }
+
+  const allActivities = await Activity.findAll({ include: Country });
+  const filterA = allActivities.map((e) => e.name.toLowerCase());
+
+  const total = filterA.filter((item, index) => {
+    return filterA.indexOf(item) === index;
+  });
+  return total;
 };
 
 module.exports = {

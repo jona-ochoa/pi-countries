@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
-import './detail.css'
+import "./detail.css";
 
 const Detail = () => {
   const [detail, setDetail] = useState([]);
@@ -23,17 +23,25 @@ const Detail = () => {
 
   return (
     <section className="detail-section">
-      <Link to="/home" className="nav-link">Back to Home</Link>
-      <h4>Name: {detail?.name}</h4>
-      <img src={detail?.flags} alt={detail?.name} />
-      <p>ID: {detail?.id}</p>
-      <p>Capital: {detail?.capital}</p>
-      <p>Continents: {detail?.continents}</p>
-      <p>Subregion: {detail?.subregion}</p>
-      <p>Area: {detail?.area}</p>
-      <p>Population: {detail?.population}</p>
+      <Link to="/home" className="nav-link">
+        Back to Home
+      </Link>
+      <div className="detail-wrapper">
+        <div className="detail-flex">
+          <img src={detail?.flags} alt={detail?.name} />
+        </div>
+        <div className="detail-flex-text">
+          <h2>Name: {detail?.name}</h2>
+          <h2>ID: {detail?.id}</h2>
+          <h2>Capital: {detail?.capital}</h2>
+          <h2>Continents: {detail?.continents}</h2>
+          <h2>Subregion: {detail?.subregion}</h2>
+          <h2>Area: {detail?.area}</h2>
+          <h2>Population: {detail?.population}</h2>
+        </div>
+      </div>
     </section>
-  )
-}
+  );
+};
 
-export default Detail
+export default Detail;

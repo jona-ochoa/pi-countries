@@ -11,6 +11,8 @@
     transition: transform 0.25s ease-out;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 900;
+    width: 210px;
+    height: 250px;
 }
 .image{
     width: 200px;
