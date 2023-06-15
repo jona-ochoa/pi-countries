@@ -106,7 +106,7 @@ const Form = () => {
       countries: [],
     });
     alert("created activities")
-    navigate("/");
+    navigate("/home");
   }
 
   const season = ["Summer", "Winter", "Spring", "Autumn"];
@@ -141,8 +141,8 @@ const Form = () => {
               onChange={handleSelectDifficulty}
               required
             >
-              {difficulty.map((e) => (
-                <option value={e} name="difficulty">
+              {difficulty.map((e, index) => (
+                <option value={e} key={index} name="difficulty">
                   {e}
                 </option>
               ))}
@@ -151,8 +151,8 @@ const Form = () => {
           <div className="form-wrapper">
             <label>Duration:</label>
             <select className="input" onChange={handleSelectDuration} required>
-              {duration.map((e) => (
-                <option value={e} name="duration">
+              {duration.map((e, index) => (
+                <option value={e} key={index} name="duration">
                   {e}
                 </option>
               ))}
@@ -163,8 +163,8 @@ const Form = () => {
           <div className="form-wrapper-select">
             <label>Season:</label>
             <select className="input" onChange={handleSeason} required>
-              {season.map((e) => (
-                <option value={e} name="season">
+              {season.map((e, index) => (
+                <option value={e} key={index} name="season">
                   {e}
                 </option>
               ))}
@@ -173,8 +173,8 @@ const Form = () => {
           <div className="form-wrapper-select">
             <label>Country / ies:</label>
             <select className="input" onChange={handleSelect}>
-              {allCountries.map((e) => (
-                <option value={e.id} name="countries" key={e.id}>
+              {allCountries.map((e, index) => (
+                <option value={e.id} name="countries" key={index}>
                   {e.name}
                 </option>
               ))}

@@ -5,13 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import Searchbar from "../../components/SearchBar/Searchbar";
 import Paginado from "../../components/Paginado/Paginado";
 
-import { getCountries, getByName, orderCountries } from "../../redux/actions";
+import {
+  getCountries,
+  getByName,
+  orderCountries,
+  orderPopulation,
+  filterContinents,
+  getActivity,
+  filterActivity
+} from "../../redux/actions";
 
 import "./Home.css";
 
 const Home = () => {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.allCountries);
+  const activity = useSelector((state) => state.activity);
 
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,6 +29,11 @@ const Home = () => {
   const [countriesPerPage, setCountriesPerPage] = useState(10);
 
   const max = Math.round(allCountries.length / countriesPerPage);
+
+  useEffect(() => {
+    dispatch(getCountries());
+    dispatch(filterActivity());   
+  }, [dispatch]);
 
   function handleChange(e) {
     e.preventDefault();
@@ -32,14 +46,26 @@ const Home = () => {
     dispatch(getByName(search));
   }
 
+  function handleOrderPopulation(e) {
+    e.preventDefault();
+    dispatch(orderPopulation(e.target.value));
+    setSearch(e.target.value);
+  }
+
+  function handleContinents(e) {
+    e.preventDefault();
+    dispatch(filterContinents(e.target.value));
+    setSearch(e.target.value);
+  }
+
   function handleOrder(e) {
     e.preventDefault();
     dispatch(orderCountries(e.target.value));
     setSearch(e.target.value);
   }
 
-  useEffect(() => {
-    dispatch(getCountries());
+  useEffect(() => {  
+    dispatch(getActivity());   
   }, [dispatch]);
 
   return (
@@ -51,19 +77,36 @@ const Home = () => {
           setCurrentPage={setCurrentPage}
           max={max}
         />
+
         <div className="wrapper-filter">
+          <select className="order" onChange={handleOrderPopulation}>
+            <option value="Max" key="Max">
+              Max population
+            </option>
+            <option value="Min" key="Min">
+              Min population
+            </option>
+          </select>
+          <select
+            className="order"
+            //  onChange={handleActivity}
+          >
+            <option value="All">All activities</option>
+            {activity?.map((e) => (
+              <option value={e} key={e}>
+                {e}
+              </option>
+            ))}
+          </select>
           <select className="order" onChange={handleOrder}>
             <option value="Asc" key="Asc">
               Ascendente
             </option>
             <option value="Desc" key="Desc">
-              Desendente
+              Descendente
             </option>
           </select>
-          <select
-            className="filter"
-            // value={selectedContinent} onChange={handleContinents}
-          >
+          <select className="filter" onChange={handleContinents}>
             <option value="All" key="All">
               All continents
             </option>

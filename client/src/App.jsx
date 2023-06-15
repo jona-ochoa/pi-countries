@@ -18,7 +18,7 @@ function App() {
       {location.pathname !== "/" && <Navbar />}
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Home />} />
+        <Route exact path="/home" element={<Home />} />
         <Route path="/:id" element={<Detail />} />
         <Route path="/form" element={<Form />} />
       </Routes>

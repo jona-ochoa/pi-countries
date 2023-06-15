@@ -57,9 +57,9 @@ function Paginado({ currentPage, setCurrentPage, max }) {
 }
 
 Paginado.propTypes = {
-  currentPage: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
   setCurrentPage: PropTypes.func.isRequired,
-  max: PropTypes.func.isRequired,
+  max: PropTypes.number.isRequired,
 };
 
 export default Paginado;

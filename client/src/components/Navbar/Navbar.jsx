@@ -1,24 +1,25 @@
 import "./Navbar.css";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-
   const navigate = useNavigate();
 
-  function handleNavigate(){
-    navigate('/form')
+  function handleNavigate() {
+    navigate("/form");
   }
 
   return (
     <header className="nav-container">
       <div className="nav-wrapper">
-        <div >
+        <div>
           <NavLink to="/" className="logo-nav">
-            Henry <span className="span">Countries</span>
+            Project <span className="span">Countries</span>
           </NavLink>
         </div>
-        <button className="btn" onClick={handleNavigate}>ADD ACTIVITY</button>
+        <button className="btn" onClick={handleNavigate}>
+          ADD ACTIVITY
+        </button>
       </div>
     </header>
   );

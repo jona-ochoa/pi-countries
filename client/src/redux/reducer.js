@@ -2,9 +2,11 @@ import {
   GET_ALL_COUNTRY,
   GET_BY_DETAIL,
   GET_BY_NAME,
-  FILTER,
-  ORDER,
+  FILTER_CONTINENTS,
+  FILTER_ACTIVITY,
+  ORDER_COUNTRY,
   GET_ACTIVITY,
+  ORDER_POPULATION,
 } from "./actions";
 
 let initialState = {
@@ -13,6 +15,7 @@ let initialState = {
   allContinents: [],
   allActivities: [],
   activity: [],
+  population: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -21,6 +24,9 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allCountries: action.payload,
+        allContinents: action.payload,
+        population: action.payload,
+        allActivities: action.payload,
       };
 
     case GET_BY_NAME:
@@ -40,45 +46,86 @@ const rootReducer = (state = initialState, action) => {
         activity: action.payload,
       };
 
-    case FILTER: {
-      const allContinents = [...state.allContinents];
-      const filterCountries = allContinents.filter(
-        (country) =>
-          action.payload === "All" || country.continents === action.payload
-      );
+    case FILTER_CONTINENTS: {
+      const allContinents = state.allContinents;
+      const filterContinents =
+        action.payload === "All"
+          ? allContinents
+          : allContinents.filter((i) => i.continents === action.payload);
       return {
         ...state,
-        countries: filterCountries,
+        allCountries: filterContinents,
       };
     }
 
-    case ORDER: {
-    const orderCountries = action.payload === 'Asc' ?
-    state.allCountries.sort(function (a, b) {
-        if (a.name > b.name) {
-            return 1;
-        }
-        if (b.name > a.name) {
-            return -1
-        }
-        return 0;
-    }) :
-    state.allCountries.sort(function (a, b) {
-        if (a.name > b.name) {
-            return -1;
-        }
-        if (b.name > a.name) {
-            return 1;
-        }
-        return 0;
-    })
-    return {
-      ...state,
-      allCountries: orderCountries
-  }
-  }
-    
+    case FILTER_ACTIVITY: {
+      const allActivities = state.allActivities;
+      const activityFilter =
+        action.payload === "All"
+          ? allActivities.filter((e) => e.activity.length > 0)
+          : allActivities.filter((c) =>
+              c.activity.find(
+                (a) => a.name === action.payload
+              )
+            );
+      return {
+        ...state,
+        allCountries: activityFilter,
+      };
+    }
+    case ORDER_COUNTRY: {
+      const orderCountries =
+        action.payload === "Asc"
+          ? state.allCountries.sort(function (a, b) {
+              if (a.name > b.name) {
+                return 1;
+              }
+              if (b.name > a.name) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.allCountries.sort(function (a, b) {
+              if (a.name > b.name) {
+                return -1;
+              }
+              if (b.name > a.name) {
+                return 1;
+              }
+              return 0;
+            });
+      return {
+        ...state,
+        allCountries: orderCountries,
+      };
+    }
 
+    case ORDER_POPULATION: {
+      const orderPopulation =
+        action.payload === "Min"
+          ? state.allCountries.sort(function (a, b) {
+              if (a.population > b.population) {
+                return 1;
+              }
+              if (b.population > a.population) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.allCountries.sort(function (a, b) {
+              if (a.population > b.population) {
+                return -1;
+              }
+              if (b.population > a.population) {
+                return 1;
+              }
+              return 0;
+            });
+      return {
+        ...state,
+        population: orderPopulation,
+      };
+    }
     default:
       return state;
   }
