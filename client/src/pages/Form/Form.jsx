@@ -115,7 +115,7 @@ const Form = () => {
       season: "",
       countries: [],
     });
-    alert("created activities")
+    // alert("created activities")
     navigate("/home");
   }
   }
@@ -194,10 +194,10 @@ const Form = () => {
             <div>
             <ul>
               <li>
-                {input.countries.map((i) => (
-                  <div key={i.id}>
-                    {i}
-                    <button onClick={() => handleDelete(i)} type="button">
+                {input.countries.map((c, index) => (
+                  <div key={index}>
+                    {c}
+                    <button onClick={() => handleDelete(c)} type="button">
                       Deleted
                     </button>
                   </div>

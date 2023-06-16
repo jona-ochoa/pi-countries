@@ -65,7 +65,7 @@ const Home = () => {
   }
 
   function handleActivity(e){
-    e.preventDeafut()
+    e.preventDefault()
     dispatch(filterActivity(e.target.value))
     setSearch(e.target.value)
   }

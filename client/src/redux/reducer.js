@@ -62,11 +62,9 @@ const rootReducer = (state = initialState, action) => {
       const allActivities = state.allActivities;
       const activityFilter =
         action.payload === "All"
-          ? allActivities.filter((e) => e.activity.length > 0)
+          ? allActivities.filter((e) => e.activities && e.activities.length > 0)
           : allActivities.filter((c) =>
-              c.activity.find(
-                (a) => a.name === action.payload
-              )
+              c.activities && action.payload && c.activities.find((element) => element.name.toLowerCase() === action.payload)
             );
       return {
         ...state,
