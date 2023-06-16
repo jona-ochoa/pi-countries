@@ -47,7 +47,6 @@ const Form = () => {
   }, [dispatch]);
 
   function handleChange(e) {
-
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -98,7 +97,7 @@ const Form = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if(input.name.length < 0){
+    if (!input.name) {
       setErrors(
         validate({
           ...input,
@@ -106,18 +105,17 @@ const Form = () => {
         })
       );
     } else {
-    dispatch(postActivity(input));
+      dispatch(postActivity(input));
 
-    setInput({
-      name: "",
-      difficulty: "",
-      duration: "",
-      season: "",
-      countries: [],
-    });
-    // alert("created activities")
-    navigate("/home");
-  }
+      setInput({
+        name: "",
+        difficulty: "",
+        duration: "",
+        season: "",
+        countries: [],
+      });
+      navigate("/home");
+    }
   }
 
   const season = ["Summer", "Winter", "Spring", "Autumn"];
@@ -192,21 +190,20 @@ const Form = () => {
               ))}
             </select>
             <div>
-            <ul>
-              <li>
-                {input.countries.map((c, index) => (
-                  <div key={index}>
-                    {c}
-                    <button onClick={() => handleDelete(c)} type="button">
-                      Deleted
-                    </button>
-                  </div>
-                ))}
-              </li>
-            </ul>
+              <ul>
+                <li>
+                  {input.countries.map((c, index) => (
+                    <div key={index}>
+                      {c}
+                      <button onClick={() => handleDelete(c)} type="button">
+                        Deleted
+                      </button>
+                    </div>
+                  ))}
+                </li>
+              </ul>
+            </div>
           </div>
-          </div>
-          
         </div>
         <div>
           <button type="submit">Submit</button>
