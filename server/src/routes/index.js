@@ -64,7 +64,9 @@ router.post("/activities", async (req, res) => {
         },
       },
     });
-    if(activity.length > 0) res.status(200).json(activityWithCountry);
+    
+    res.json(activityWithCountry);
+
   } catch (error) {
     res.status(500).json({error: error.message});
   }

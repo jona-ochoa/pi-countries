@@ -8,7 +8,7 @@ const getActivity = async () => {
   const total = filterA.filter((item, index) => {
     return filterA.indexOf(item) === index;
   });
-  return total;
+  return total
 };
 
 module.exports = {

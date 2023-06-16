@@ -47,10 +47,12 @@ const Form = () => {
   }, [dispatch]);
 
   function handleChange(e) {
+
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
+
     setErrors(
       validate({
         ...input,
@@ -96,6 +98,14 @@ const Form = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if(input.name.length < 0){
+      setErrors(
+        validate({
+          ...input,
+          [e.target.name]: e.target.value,
+        })
+      );
+    } else {
     dispatch(postActivity(input));
 
     setInput({
@@ -107,6 +117,7 @@ const Form = () => {
     });
     alert("created activities")
     navigate("/home");
+  }
   }
 
   const season = ["Summer", "Winter", "Spring", "Autumn"];
@@ -125,13 +136,14 @@ const Form = () => {
         <div className="form-wrapper">
           <label>Name Activity: </label>
           <input
-            className="input"
+            className="input-name"
             type="text"
             value={input.name}
+            placeholder="Your Activities"
             name="name"
             onChange={handleChange}
           />
-          {errors.name && <p>{errors.name}</p>}
+          {errors.name && <p className="text-error">{errors.name}</p>}
         </div>
         <div className="form-two">
           <div className="form-wrapper">
@@ -153,7 +165,7 @@ const Form = () => {
             <select className="input" onChange={handleSelectDuration} required>
               {duration.map((e, index) => (
                 <option value={e} key={index} name="duration">
-                  {e}
+                  {e} Hours
                 </option>
               ))}
             </select>

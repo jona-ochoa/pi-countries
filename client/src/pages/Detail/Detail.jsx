@@ -31,8 +31,8 @@ const Detail = () => {
           <img src={detail?.flags} alt={detail?.name} />
         </div>
         <div className="detail-flex-text">
-          <h2>Name: {detail?.name}</h2>
           <h2>ID: {detail?.id}</h2>
+          <h2>Name: {detail?.name}</h2>
           <h2>Capital: {detail?.capital}</h2>
           <h2>Continents: {detail?.continents}</h2>
           <h2>Subregion: {detail?.subregion}</h2>

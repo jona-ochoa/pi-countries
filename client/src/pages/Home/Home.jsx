@@ -64,6 +64,12 @@ const Home = () => {
     setSearch(e.target.value);
   }
 
+  function handleActivity(e){
+    e.preventDeafut()
+    dispatch(filterActivity(e.target.value))
+    setSearch(e.target.value)
+  }
+
   useEffect(() => {  
     dispatch(getActivity());   
   }, [dispatch]);
@@ -89,7 +95,7 @@ const Home = () => {
           </select>
           <select
             className="order"
-            //  onChange={handleActivity}
+             onChange={handleActivity}
           >
             <option value="All">All activities</option>
             {activity?.map((e) => (
