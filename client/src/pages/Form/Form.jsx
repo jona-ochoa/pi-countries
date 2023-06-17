@@ -35,7 +35,7 @@ const Form = () => {
     difficulty: "",
     duration: "",
     season: "",
-    countries: [],
+    allCountries: [],
   });
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Form = () => {
   function handleSelect(id) {
     setInput({
       ...input,
-      countries: [...input.countries, id.target.value],
+      allCountries: [...input.allCountries, id.target.value],
     });
   }
 
@@ -91,7 +91,7 @@ const Form = () => {
   function handleDelete(e) {
     setInput({
       ...input,
-      countries: input.countries.filter((c) => c !== e),
+      allCountries: input.allCountries.filter((c) => c !== e),
     });
   }
 
@@ -112,7 +112,7 @@ const Form = () => {
         difficulty: "",
         duration: "",
         season: "",
-        countries: [],
+        allCountries: [],
       });
       navigate("/home");
     }
