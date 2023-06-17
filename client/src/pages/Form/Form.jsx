@@ -16,7 +16,7 @@ const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const allCountries = useSelector((state) => state.allCountries).sort(
+  const countries = useSelector((state) => state.countries).sort(
     (a, b) => {
       if (a.name < b.name) {
         return -1;
@@ -35,7 +35,7 @@ const Form = () => {
     difficulty: "",
     duration: "",
     season: "",
-    allCountries: [],
+    countries: [],
   });
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Form = () => {
   function handleSelect(id) {
     setInput({
       ...input,
-      allCountries: [...input.allCountries, id.target.value],
+      countries: [...input.countries, id.target.value],
     });
   }
 
@@ -91,7 +91,7 @@ const Form = () => {
   function handleDelete(e) {
     setInput({
       ...input,
-      allCountries: input.allCountries.filter((c) => c !== e),
+      countries: input.countries.filter((c) => c !== e),
     });
   }
 
@@ -112,7 +112,7 @@ const Form = () => {
         difficulty: "",
         duration: "",
         season: "",
-        allCountries: [],
+        countries: [],
       });
       navigate("/home");
     }
@@ -183,7 +183,7 @@ const Form = () => {
           <div className="form-wrapper-select">
             <label>Country / ies:</label>
             <select className="input" onChange={handleSelect}>
-              {allCountries.map((e, index) => (
+              {countries.map((e, index) => (
                 <option value={e.id} name="countries" key={index}>
                   {e.name}
                 </option>

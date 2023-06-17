@@ -19,7 +19,7 @@ import "./Home.css";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const allCountries = useSelector((state) => state.allCountries);
+  const countries = useSelector((state) => state.countries);
   const activity = useSelector((state) => state.activity);
 
   const [search, setSearch] = useState("");
@@ -28,7 +28,7 @@ const Home = () => {
   // eslint-disable-next-line no-unused-vars
   const [countriesPerPage, setCountriesPerPage] = useState(10);
 
-  const max = Math.round(allCountries.length / countriesPerPage);
+  const max = Math.round(countries.length / countriesPerPage);
 
   useEffect(() => {
     dispatch(getCountries());
@@ -98,8 +98,8 @@ const Home = () => {
              onChange={handleActivity}
           >
             <option value="All">All activities</option>
-            {activity?.map((e) => (
-              <option value={e} key={e}>
+            {activity?.map((e, index) => (
+              <option value={e} key={index}>
                 {e}
               </option>
             ))}
@@ -141,7 +141,7 @@ const Home = () => {
         </div>
       </div>
       <div className="home-wrapper">
-        {allCountries
+        {countries
           .slice(
             (currentPage - 1) * countriesPerPage,
             (currentPage - 1) * countriesPerPage + countriesPerPage

@@ -54,18 +54,12 @@ router.post("/activities", async (req, res) => {
 
     let activityWithCountry = await Activity.findOne({
       where: { name: name },
-      attributes: {
-        exclude: ["updatedAt", "createdAt"],
-      },
       include: {
         model: Country,
-        through: {
-          attributes: [],
-        },
       },
     });
     
-    res.json(activityWithCountry);
+    res.status(200).json(activityWithCountry);
 
   } catch (error) {
     res.status(500).json({error: error.message});
