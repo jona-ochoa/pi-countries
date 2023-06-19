@@ -1,25 +1,25 @@
-const {Activity, Country} = require('../../db')
+const { Activity, Country } = require("../../db");
 
-const postActivity = async(name,difficulty,duration,season,countries) => {
-    if(!countries) throw Error('You Must Provide a Country')
+const postActivity = async (name, difficulty, duration, season, countries) => {
+  const post = await Activity.create({ name, difficulty, season, duration });
+  await post.setCountries(countries);
 
-    if(![name,difficulty,duration,season].every(Boolean)) throw Error('Missing data')
-    
-    Array.isArray(countries) ? countries : [countries];
+  let activityWithCountry = await Activity.findOne({
+    where: { name: name },
+    attributes: {
+      exclude: ["updatedAt", "createdAt"],
+    },
+    include: {
+      model: Country,
+      through: {
+        attributes: [],
+      },
+    },
+  });
 
-    const [newActivity,created] = await Activity.findOrCreate({where:{
-        name,
-        difficulty,
-        season,
-        duration
-    }})
-
-    await newActivity.addCountries(countries)
-
-    return newActivity
-
-}
+  res.json(activityWithCountry);
+};
 
 module.exports = {
-    postActivity
-}
+  postActivity,
+};
