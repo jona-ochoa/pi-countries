@@ -1,4 +1,4 @@
-const { Country } = require("../../db");
+const { Country, Activity } = require("../../db");
 const { Op } = require("sequelize");
 
 const getCountryByName = async (name) => {
@@ -9,6 +9,7 @@ const getCountryByName = async (name) => {
           [Op.iLike]: `%${name}%`,
         },
       },
+      include: Activity
     });
 
     return filteredCountry.length > 0
