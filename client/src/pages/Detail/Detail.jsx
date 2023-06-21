@@ -21,6 +21,15 @@ const Detail = () => {
     });
   }, [id]);
 
+  // const activities = detail.activities?.map((e) => {
+  //   return {
+  //     name: e.name,
+  //     difficulty: e.difficulty,
+  //     duration: e.duration,
+  //     season: e.season,
+  //   };
+  // });
+
   return (
     <section className="detail-section">
       <Link to="/home" className="nav-link">
@@ -31,13 +40,23 @@ const Detail = () => {
           <img src={detail?.flags} alt={detail?.name} />
         </div>
         <div className="detail-flex-text">
-          <h2>ID: {detail?.id}</h2>
-          <h2>Name: {detail?.name}</h2>
-          <h2>Capital: {detail?.capital}</h2>
-          <h2>Continents: {detail?.continents}</h2>
-          <h2>Subregion: {detail?.subregion}</h2>
-          <h2>Area: {detail?.area}</h2>
-          <h2>Population: {detail?.population}</h2>
+          <p>ID: {detail?.id}</p>
+          <p>Name: {detail?.name}</p>
+          <p>Capital: {detail?.capital}</p>
+          <p>Continents: {detail?.continents}</p>
+          <p>Subregion: {detail?.subregion}</p>
+          <p>Area: {detail?.area}</p>
+          <p>Population: {detail?.population}</p>
+          <p>Activities: {detail?.activities?.map((e) => {
+            return (
+              <div key={e.id}>
+              <p>{e.name}</p>
+              <p>{e.difficulty}</p>
+              <p>{e.duration}</p>
+              <p>{e.season}</p>
+              </div>
+            )
+          })}</p>
         </div>
       </div>
     </section>
