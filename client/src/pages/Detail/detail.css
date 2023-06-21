@@ -1,13 +1,11 @@
 /* Palette colors */
 /* #ffc107;  #1F271B; #D4E97B; #B4E8C3; #7F7B7B*/
 .detail-section{
-    height: 100%;
-    background-image: url('../../assets/world.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-size: 25x;   
+    height: 100vh;   
     letter-spacing: 3px;
     padding: 40px 70px;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-link{
@@ -24,7 +22,6 @@
 
 .detail-wrapper{
     display: flex;
-    height: 500px;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
@@ -45,6 +42,6 @@
 }
 
 img{
-    width: 400px;
-    height: 400px;
+    max-width: 600px;
+    max-height: 600px;
 }
