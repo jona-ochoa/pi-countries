@@ -12,7 +12,7 @@ import {
   orderPopulation,
   filterContinents,
   getActivity,
-  filterActivity
+  byActivity
 } from "../../redux/actions";
 
 import "./Home.css";
@@ -32,7 +32,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getCountries());
-    dispatch(filterActivity());   
+    dispatch(byActivity());   
   }, [dispatch]);
 
   function handleChange(e) {
@@ -66,7 +66,7 @@ const Home = () => {
 
   function handleActivity(e){
     e.preventDefault()
-    dispatch(filterActivity(e.target.value))
+    dispatch(byActivity(e.target.value))
     setSearch(e.target.value)
   }
 
@@ -98,8 +98,8 @@ const Home = () => {
              onChange={handleActivity}
           >
             <option value="All">All activities</option>
-            {activity?.map((e, index) => (
-              <option value={e} key={index}>
+            {activity.map((e) => (
+              <option value={e} key={e}>
                 {e}
               </option>
             ))}

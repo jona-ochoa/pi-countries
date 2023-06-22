@@ -12,8 +12,9 @@ const postActivityHandler = async (req, res) => {
       season,
       countries
     );
-
+    if(newPost.length < 0){
     res.status(200).json(newPost);
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -4,7 +4,7 @@ const postActivity = async (name, difficulty, duration, season, countries) => {
   const post = await Activity.create({ name, difficulty, season, duration });
   await post.setCountries(countries);
 
-  let activityWithCountry = await Activity.findOne({
+  let activityAndCountry = await Activity.findOne({
     where: { name: name },
     attributes: {
       exclude: ["updatedAt", "createdAt"],
@@ -17,7 +17,7 @@ const postActivity = async (name, difficulty, duration, season, countries) => {
     },
   });
 
-  res.json(activityWithCountry);
+  res.json(activityAndCountry);
 };
 
 module.exports = {

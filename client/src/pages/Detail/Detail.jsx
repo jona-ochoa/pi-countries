@@ -21,15 +21,6 @@ const Detail = () => {
     });
   }, [id]);
 
-  // const activities = detail.activities?.map((e) => {
-  //   return {
-  //     name: e.name,
-  //     difficulty: e.difficulty,
-  //     duration: e.duration,
-  //     season: e.season,
-  //   };
-  // });
-
   return (
     <section className="detail-section">
       <Link to="/home" className="nav-link">
@@ -47,16 +38,23 @@ const Detail = () => {
           <p>Subregion: {detail?.subregion}</p>
           <p>Area: {detail?.area}</p>
           <p>Population: {detail?.population}</p>
-          <p>Activities: {detail?.activities?.map((e) => {
-            return (
-              <div key={e.id}>
-              <p>{e.name}</p>
-              <p>{e.difficulty}</p>
-              <p>{e.duration}</p>
-              <p>{e.season}</p>
-              </div>
-            )
-          })}</p>
+          <p>
+            ACTIVITIES
+            {detail?.activities?.length > 0 ? (
+              detail?.activities?.map((e) => {
+                return (
+                  <div key={e.id}>
+                    <p>Name: {e.name}</p>
+                    <p>Difficulty: {e.difficulty}</p>
+                    <p>Duration: {e.duration}</p>
+                    <p>Season: {e.season}</p>
+                  </div>
+                );
+              })
+            ) : (
+              <p>Without activities</p>
+            )}
+          </p>
         </div>
       </div>
     </section>

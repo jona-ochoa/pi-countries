@@ -24,6 +24,7 @@
     border: 1px solid  #ffc107;
     flex-basis: calc(20% - 20px);
     margin-bottom: 20px;
+    transition: all .5s;
   }
   
   @media screen and (max-width: 768px) {
@@ -35,6 +36,13 @@
   @media screen and (max-width: 480px) {
     .cards-wrapper > div {
       flex-basis: calc(100% - 20px);
+    }
+  }
+
+  .card:hover{
+    transition: all .5s;
+    .flags-img{
+      transform: scale(1.2);
     }
   }
 
@@ -53,7 +61,7 @@
   text-align: center;
   align-items: center;
   gap: 20px;
-  width: 500px;
+  min-width: 500px;
   padding: 20px 0;
 }
 

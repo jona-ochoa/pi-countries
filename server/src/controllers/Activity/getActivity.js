@@ -3,12 +3,13 @@ const { Activity, Country } = require("../../db");
 const getActivity = async () => {
 
   const allActivities = await Activity.findAll({ include: Country });
-  const filterA = allActivities.map((e) => e.name.toLowerCase());
+  
+  const filterActivity = allActivities.map((e) => e.name.toLowerCase());
 
-  const total = filterA.filter((item, index) => {
-    return filterA.indexOf(item) === index;
+  const result = filterActivity.filter((item, index) => {
+    return filterActivity.indexOf(item) === index;
   });
-  return total
+  return result
 };
 
 module.exports = {

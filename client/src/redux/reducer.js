@@ -3,9 +3,9 @@ import {
   GET_BY_DETAIL,
   GET_BY_NAME,
   FILTER_CONTINENTS,
-  FILTER_ACTIVITY,
   ORDER_COUNTRY,
   GET_ACTIVITY,
+  BY_ACTIVITY,
   ORDER_POPULATION,
 } from "./actions";
 
@@ -45,31 +45,32 @@ const rootReducer = (state = initialState, action) => {
         activity: action.payload,
       };
 
+    case BY_ACTIVITY: {
+      const allActivities = state.allActivities;
+      const filteredActivities =
+        action.payload === "All"
+          ? allActivities.filter((e) => e.activities.length > 0)
+          : allActivities.filter((c) => {
+            c.activities && c.activities.find((e) => e.name.toLowerCase() === action.payload);
+            });
+      return {
+        ...state,
+        countries: filteredActivities,
+      };
+    }
+
     case FILTER_CONTINENTS: {
       const allContinents = state.allContinents;
       const filterContinents =
         action.payload === "All"
           ? allContinents
-          : allContinents.filter((i) => i.continents === action.payload);
+          : allContinents.filter((a) => a.continents === action.payload);
       return {
         ...state,
         countries: filterContinents,
       };
     }
 
-    case FILTER_ACTIVITY: {
-      const allActivities = state.allActivities;
-      const activityFilter =
-        action.payload === "All"
-          ? allActivities.filter((e) => e.activities && e.activities.length > 0)
-          : allActivities.filter((c) =>
-              c.activities && action.payload && c.activities.find((element) => element.name.toLowerCase() === action.payload)
-            );
-      return {
-        ...state,
-        countries: activityFilter,
-      };
-    }
     case ORDER_COUNTRY: {
       const orderCountries =
         action.payload === "Asc"

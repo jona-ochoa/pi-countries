@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getActivity, getCountries, postActivity } from "../../redux/actions";
 import "./form.css";
+import FormSuccess from "../../components/FormSuccess/FormSuccess";
 
 function validate(input) {
   let errors = {};
@@ -16,17 +17,17 @@ const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const countries = useSelector((state) => state.countries).sort(
-    (a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
+  const [isSubmited, setIsSubmited] = useState(false);
+
+  const countries = useSelector((state) => state.countries).sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
     }
-  );
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
 
   const [errors, setErrors] = useState({});
 
@@ -114,7 +115,11 @@ const Form = () => {
         season: "",
         countries: [],
       });
-      navigate("/home");
+      setIsSubmited(true);
+
+      setTimeout(function () {
+        navigate("/home");
+      }, 3000);
     }
   }
 
@@ -127,88 +132,110 @@ const Form = () => {
 
   return (
     <div className="form-container">
-      <div>
-        <h2>ADD A TOURIST ACTIVITY</h2>
-      </div>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="form-wrapper">
-          <label>Name Activity: </label>
-          <input
-            className="input-name"
-            type="text"
-            value={input.name}
-            placeholder="Your Activities"
-            name="name"
-            onChange={handleChange}
-          />
-          {errors.name && <p className="text-error">{errors.name}</p>}
-        </div>
-        <div className="form-two">
-          <div className="form-wrapper">
-            <label>Difficulty: </label>
-            <select
-              className="input"
-              onChange={handleSelectDifficulty}
-              required
-            >
-              {difficulty.map((e, index) => (
-                <option value={e} key={index} name="difficulty">
-                  {e}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-wrapper">
-            <label>Duration:</label>
-            <select className="input" onChange={handleSelectDuration} required>
-              {duration.map((e, index) => (
-                <option value={e} key={index} name="duration">
-                  {e} Hours
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="form-two">
-          <div className="form-wrapper-select">
-            <label>Season:</label>
-            <select className="input" onChange={handleSeason} required>
-              {season.map((e, index) => (
-                <option value={e} key={index} name="season">
-                  {e}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-wrapper-select">
-            <label>Country / ies:</label>
-            <select className="input" onChange={handleSelect}>
-              {countries.map((e, index) => (
-                <option value={e.id} name="countries" key={index}>
-                  {e.name}
-                </option>
-              ))}
-            </select>
-            <div>
-              <ul>
-                <li>
-                  {input.countries.map((c, index) => (
-                    <div key={index}>
-                      {c}
-                      <button onClick={() => handleDelete(c)} type="button">
-                        Deleted
-                      </button>
-                    </div>
-                  ))}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      {!isSubmited ? (
         <div>
-          <button type="submit">Submit</button>
+          <div>
+            <h2>ADD A TOURIST ACTIVITY</h2>
+          </div>
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="form-wrapper">
+              <label>Name Activity: </label>
+              <input
+                className="input-name"
+                type="text"
+                value={input.name}
+                placeholder="Your Activities"
+                name="name"
+                onChange={handleChange}
+              />
+              {errors.name && <p className="text-error">{errors.name}</p>}
+            </div>
+            <div className="form-two">
+              <div className="form-wrapper">
+                <label>Difficulty: </label>
+                <select
+                  className="input"
+                  onChange={handleSelectDifficulty}
+                  required
+                >
+                  <option value="" hidden>
+                    Select difficulty
+                  </option>
+                  {difficulty.map((e, index) => (
+                    <option value={e} key={index} name="difficulty">
+                      {e}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-wrapper">
+                <label>Duration:</label>
+                <select
+                  className="input"
+                  onChange={handleSelectDuration}
+                  required
+                >
+                  <option value="" hidden>
+                    Selected duration
+                  </option>
+                  {duration.map((e, index) => (
+                    <option value={e} key={index} name="duration">
+                      {e} Hours
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="form-two">
+              <div className="form-wrapper-select">
+                <label>Season:</label>
+                <select className="input" onChange={handleSeason} required>
+                  <option value="" hidden>
+                    Selected season
+                  </option>
+                  {season.map((e, index) => (
+                    <option value={e} key={index} name="season">
+                      {e}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-wrapper-select">
+                <label>Country / ies:</label>
+                <select className="input" onChange={handleSelect}>
+                  <option value="" hidden>
+                    Selected country
+                  </option>
+                  {countries.map((e, index) => (
+                    <option value={e.id} name="countries" key={index}>
+                      {e.name}
+                    </option>
+                  ))}
+                </select>
+                <div>
+                  <ul className="list">
+                    <li className="li">
+                      {input.countries.map((c, index) => (
+                        <div key={index} className="countries">
+                          {c}
+                          <button onClick={() => handleDelete(c)} type="button">
+                            Deleted
+                          </button>
+                        </div>
+                      ))}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </form>
         </div>
-      </form>
+      ) : (
+        <FormSuccess />
+      )}
     </div>
   );
 };

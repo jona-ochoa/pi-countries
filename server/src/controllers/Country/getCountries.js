@@ -1,12 +1,12 @@
 const axios = require("axios");
-const { Country } = require("../../db");
+const { Country, Activity } = require("../../db");
 
 const getCountries = async () => {
   const URL = "http://localhost:5000/countries";
   try {
     const { data } = await axios(URL);
-
-    let countries = await Promise.all(
+    let countries = await Country.findAll()
+    countries = await Promise.all(
       data.map(async (element) => {
         const country = {
           id: element.cca3,
@@ -31,9 +31,14 @@ const getCountries = async () => {
             area: element.area ? element.area.toString() : "Not Found",
           },
         });
+
         return country;
       })
     );
+
+    countries = await Country.findAll({
+      include: Activity,
+    });
 
     return countries;
   } catch (error) {

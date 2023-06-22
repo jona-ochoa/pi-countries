@@ -5,7 +5,7 @@ export const GET_BY_NAME = "GET_BY_NAME";
 export const GET_BY_DETAIL = "GET_BY_DETAIL";
 export const GET_ACTIVITY = "GET_ACTIVITY";
 export const FILTER_CONTINENTS = "FILTER_CONTINENTS";
-export const FILTER_ACTIVITY = "FILTER_ACTIVITY";
+export const BY_ACTIVITY = "BY_ACTIVITY";
 export const ORDER_COUNTRY = "ORDER_COUNTRY";
 export const ORDER_POPULATION = "ORDER_POPULATION";
 
@@ -86,6 +86,13 @@ export function postActivity(payload) {
   };
 }
 
+export const byActivity = (payload) =>{
+  return {
+    type: BY_ACTIVITY,
+    payload
+  }
+}
+
 export const orderCountries = (payload) => {
   return {
     type: ORDER_COUNTRY,
@@ -103,13 +110,6 @@ export const filterContinents = (payload) => {
 export const orderPopulation = (payload) => {
   return {
     type: ORDER_POPULATION,
-    payload,
-  };
-};
-
-export const filterActivity = (payload) => {
-  return {
-    type: FILTER_ACTIVITY,
     payload,
   };
 };
