@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="nav-wrapper">
         <div>
           <NavLink to="/" className="logo-nav">
-            Project <span className="span">Countries</span>
+            Countries <span className="span">Project</span>
           </NavLink>
         </div>
         <button className="btn" onClick={handleNavigate}>
