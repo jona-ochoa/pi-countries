@@ -45,19 +45,19 @@ const rootReducer = (state = initialState, action) => {
         activity: action.payload,
       };
 
-    case BY_ACTIVITY: {
-      const allActivities = state.allActivities;
-      const filteredActivities =
-        action.payload === "All"
-          ? allActivities.filter((e) => e.activities.length > 0)
-          : allActivities.filter((c) => {
-            c.activities && c.activities.find((e) => e.name.toLowerCase() === action.payload);
-            });
-      return {
-        ...state,
-        countries: filteredActivities,
-      };
-    }
+      case BY_ACTIVITY: {
+        const allActivities = state.allActivities;
+        const filteredActivities =
+          action.payload === "All"
+            ? allActivities.filter((e) => e.activities.length > 0)
+            : allActivities.filter((c) =>
+                c.activities.find((e) => e.name.toLowerCase() === action.payload)
+            );
+        return {
+          ...state,
+          countries: filteredActivities,
+        };
+      }
 
     case FILTER_CONTINENTS: {
       const allContinents = state.allContinents;
