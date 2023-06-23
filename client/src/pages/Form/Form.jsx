@@ -61,11 +61,16 @@ const Form = () => {
     );
   }
 
-  function handleSelect(id) {
-    setInput({
-      ...input,
-      countries: [...input.countries, id.target.value],
-    });
+  function handleSelect(e) {
+    const selectedCountries = e.target.value;
+    if (!input.countries.includes(selectedCountries)) {
+      setInput({
+        ...input,
+        countries: [...input.countries, selectedCountries],
+      });
+    } else {
+      alert("Country already selected");
+    }
   }
 
   function handleSeason(e) {
@@ -89,10 +94,10 @@ const Form = () => {
     });
   }
 
-  function handleDelete(e) {
+  function handleDelete(country) {
     setInput({
       ...input,
-      countries: input.countries.filter((c) => c !== e),
+      countries: input.countries.filter((c) => c !== country),
     });
   }
 

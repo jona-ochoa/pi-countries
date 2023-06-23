@@ -181,6 +181,7 @@ const Home = () => {
                   <p className="text">{e.name}</p>
                   <p className="text">{e.id}</p>
                   <p className="text">{e.continents}</p>
+                  <p className="text">{e.population}</p>
                 </div>
               </Link>
             );
