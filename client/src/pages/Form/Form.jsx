@@ -119,7 +119,7 @@ const Form = () => {
 
       setTimeout(function () {
         navigate("/home");
-      }, 3000);
+      }, 2000);
     }
   }
 
@@ -176,7 +176,7 @@ const Form = () => {
                   required
                 >
                   <option value="" hidden>
-                    Selected duration
+                    Select duration
                   </option>
                   {duration.map((e, index) => (
                     <option value={e} key={index} name="duration">
@@ -191,7 +191,7 @@ const Form = () => {
                 <label>Season:</label>
                 <select className="input" onChange={handleSeason} required>
                   <option value="" hidden>
-                    Selected season
+                    Select season
                   </option>
                   {season.map((e, index) => (
                     <option value={e} key={index} name="season">
@@ -204,7 +204,7 @@ const Form = () => {
                 <label>Country / ies:</label>
                 <select className="input" onChange={handleSelect}>
                   <option value="" hidden>
-                    Selected country
+                    Select country
                   </option>
                   {countries.map((e, index) => (
                     <option value={e.id} name="countries" key={index}>

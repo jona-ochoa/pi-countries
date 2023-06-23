@@ -25,14 +25,23 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [isLoading, setIsLoading] = useState(true)
+
   // eslint-disable-next-line no-unused-vars
   const [countriesPerPage, setCountriesPerPage] = useState(10);
 
   const max = Math.round(countries.length / countriesPerPage);
 
   useEffect(() => {
-    dispatch(getCountries());
-    dispatch(byActivity());   
+    dispatch(getCountries())
+    .then(() => {
+      setIsLoading(false); // Se establece isLoading en false cuando se completa la carga
+    })
+    .catch((error) => {
+      setIsLoading(false);
+      console.error("Error fetching countries:", error);
+    });
+    dispatch(byActivity());
   }, [dispatch]);
 
   function handleChange(e) {
@@ -42,8 +51,20 @@ const Home = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setCurrentPage(1);
-    dispatch(getByName(search));
+    const trimmedSearch = search.trim();
+    if (trimmedSearch === '') {
+      dispatch(getCountries());
+    } else {
+      const filteredCountries = countries.filter(country =>
+        country.name.toLowerCase().includes(trimmedSearch.toLowerCase())
+      );
+      if (filteredCountries.length === 0) {
+        alert('No countries were found matching your search. Try again.');
+      } else {
+        setCurrentPage(1);
+        dispatch(getByName(trimmedSearch));
+      }
+    }
   }
 
   function handleOrderPopulation(e) {
@@ -141,14 +162,20 @@ const Home = () => {
         </div>
       </div>
       <div className="home-wrapper">
-        {countries
+      {isLoading ? (
+        <div className="loading">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+          </div>
+      ) : (
+        countries
           .slice(
             (currentPage - 1) * countriesPerPage,
             (currentPage - 1) * countriesPerPage + countriesPerPage
           )
           .map((e) => {
             return (
-              <Link className="card" to={"/" + e.id} key={e.id}>
+              <Link className="card" to={"/home/" + e.id} key={e.id}>
                 <div>
                   <img className="flags-img" src={e.flags} alt={e.name} />
                   <p className="text">{e.name}</p>
@@ -157,8 +184,10 @@ const Home = () => {
                 </div>
               </Link>
             );
-          })}
+          })
+          )}
       </div>
+      
     </div>
   );
 };
