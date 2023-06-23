@@ -5,23 +5,14 @@ const getCountries = async () => {
   const URL = "http://localhost:5000/countries";
   try {
     const { data } = await axios(URL);
-    let countries = await Country.findAll()
-    countries = await Promise.all(
-      data.map(async (element) => {
-        const country = {
-          id: element.cca3,
-          name: element.name.common,
-          flags: element.flags.png,
-          capital: element.capital ? element.capital[0] : "Not Found",
-          continents: element.continents[0],
-          population: element.population,
-          subregion: element.subregion,
-          area: element.area ? element.area.toString() : "Not Found",
-        };
 
-        Country.findOrCreate({
+    await Promise.all(
+      data.map(async (element) => {
+        await Country.findOrCreate({
           where: {
             id: element.cca3,
+          },
+          defaults: {
             name: element.name.common,
             flags: element.flags.png,
             capital: element.capital ? element.capital[0] : "Not Found",
@@ -31,12 +22,10 @@ const getCountries = async () => {
             area: element.area ? element.area.toString() : "Not Found",
           },
         });
-
-        return country;
       })
     );
 
-    countries = await Country.findAll({
+    const countries = await Country.findAll({
       include: Activity,
     });
 
