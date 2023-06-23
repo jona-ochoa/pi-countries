@@ -52,7 +52,7 @@ const Detail = () => {
                 );
               })
             ) : (
-              <p>Without activities</p>
+              <p>0</p>
             )}
           </p>
         </div>
