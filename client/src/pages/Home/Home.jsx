@@ -35,7 +35,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getCountries())
     .then(() => {
-      setIsLoading(false); // Se establece isLoading en false cuando se completa la carga
+      setIsLoading(false);
     })
     .catch((error) => {
       setIsLoading(false);
@@ -173,11 +173,11 @@ const Home = () => {
             (currentPage - 1) * countriesPerPage,
             (currentPage - 1) * countriesPerPage + countriesPerPage
           )
-          .map((e) => {
+          ?.map((e) => {
             return (
               <Link className="card" to={"/home/" + e.id} key={e.id}>
                 <div>
-                  <img className="flags-img" src={e.flags} alt={e.name} />
+                  <img loading="lazy" className="flags-img" src={e.flags} alt={e.name} />
                   <p className="text">{e.name}</p>
                   <p className="text">{e.id}</p>
                   <p className="text">{e.continents}</p>
