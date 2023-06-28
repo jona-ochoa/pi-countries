@@ -39,16 +39,12 @@
     }
   }
 
-  .card:hover{
-    transition: all .5s;
-    .flags-img{
-      transform: scale(1.2);
-    }
-  }
-
 .flags-img{
     width: 200px;
     height: 100px;
+    border-radius: 4px;
+    filter: drop-shadow(4px 4px 6px rgba(209, 201, 201, 0.5));
+    object-fit: cover;
 }
 
 .text{
