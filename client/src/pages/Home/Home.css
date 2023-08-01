@@ -14,15 +14,16 @@
 .home-wrapper{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     max-width: 100%;
-    padding: 0 50px;
+    padding: 0 20px;
     margin: 0;
 }
 
 .card {
     border: 1px solid  #ffc107;
-    flex-basis: calc(20% - 20px);
+    /* flex-basis: calc(20% - 20px); */
+    max-width: 200px;
     margin-bottom: 20px;
     transition: all .5s;
   }

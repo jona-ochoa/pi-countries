@@ -10,6 +10,6 @@ server.use(morgan("dev"));
 server.use(express.json());
 server.use(cors());
 
-server.use(router);
+server.use("api/v1", router);
 
 module.exports = server;
