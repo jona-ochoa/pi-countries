@@ -13,7 +13,7 @@ export function getCountries() {
   // endpoint = "http://pi-countries-api-nine.vercel.app/api/v1/countries";
   return async function (dispatch) {
     try {
-      const response = await axios("https://pi-countries-api-nine.vercel.app/api/v1/countries");
+      const response = await axios("http://localhost:3001/api/v1/countries");
       return dispatch({
         type: GET_ALL_COUNTRY,
         payload: response.data,
@@ -28,7 +28,7 @@ export function getByName(name) {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(
-        `https://pi-countries-api-nine.vercel.app/api/v1/countries/?name=${name}`
+        `http://localhost:3001/api/v1/countries/?name=${name}`
       );
 
       const filteredCountries = data.filter((country) =>
@@ -49,7 +49,7 @@ export function getByDetail(id) {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `https://pi-countries-api-nine.vercel.app/api/v1/countries/:${id}`
+        `http://localhost:3001/api/v1/countries/:${id}`
       );
       return dispatch({
         type: GET_BY_DETAIL,
@@ -64,7 +64,7 @@ export function getByDetail(id) {
 export function getActivity() {
   return async function (dispatch) {
     try {
-      const response = await axios.get("https://pi-countries-api-nine.vercel.app/api/v1/activities");
+      const response = await axios.get("http://localhost:3001/api/v1/activities");
       return dispatch({
         type: GET_ACTIVITY,
         payload: response.data,
@@ -78,7 +78,7 @@ export function getActivity() {
 export function postActivity(payload) {
   return async function () {
     try {
-      const res = await axios.post("https://pi-countries-api-nine.vercel.app/api/v1/activities", payload);
+      const res = await axios.post("http://localhost:3001/api/v1/activities", payload);
       return res;
     } catch (error) {
       console.log(error);

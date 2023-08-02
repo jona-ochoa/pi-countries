@@ -9,7 +9,7 @@ const Detail = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios(`https://pi-countries-api-nine.vercel.app/api/v1/countries/${id}`).then(({ data }) => {
+    axios(`http://localhost:3001/api/v1/countries/${id}`).then(({ data }) => {
       if (data && data.name && data.id && data.flags) {
         const getCountryExist = detail.id === data.id;
         if (!getCountryExist) {
